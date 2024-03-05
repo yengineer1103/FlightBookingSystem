@@ -12,7 +12,6 @@ function App() {
       </header>
       <main>
       <div className='main-body'>
-        <h1>Welcome to my booking website</h1>
         <AppRoutes/>
       </div>
       </main>
