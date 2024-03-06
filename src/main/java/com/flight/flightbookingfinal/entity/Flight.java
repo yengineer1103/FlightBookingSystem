@@ -9,17 +9,17 @@ public class Flight {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JoinColumn(name = "source_location")
+    @Column(name = "source_location")
     private String source;
-    @JoinColumn(name = "dest_location")
+    @Column(name = "dest_location")
     private String dest;
-    @JoinColumn(name = "date")
+    @Column(name = "date")
     private String departureDate;
-    @JoinColumn(name = "departure_time")
+    @Column(name = "departure_time")
     private String departureTime;
-    @JoinColumn(name = "price")
+    @Column(name = "price")
     private String price;
-    @JoinColumn(name = "aircraft")
+    @Column(name = "aircraft")
     private String aircraft;
 
     public Integer getId() {
