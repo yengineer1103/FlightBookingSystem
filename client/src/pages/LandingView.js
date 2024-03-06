@@ -39,10 +39,18 @@ export default function LandingView(props) {
             return null
         }
         return(
-            searchFlights.map((flight,index)=>(
-                <Paper>
-                    
+            searchResults?.responseData.map((flight,index)=>(
+                <>
+                <Paper key={index} elevation={3}>
+                    <div style={{padding:'10px'}}>
+                        <div>Time: {flight.departureTime}</div>
+                        <div>Price: {flight.price}</div>
+                        <div>Aircraft: {flight.aircraft}</div>
+                    </div>
+                    <div><Button variant='outlined'>Book</Button></div><br/>
                 </Paper>
+                <br/>
+                </>
             ))
         )
     }
@@ -119,7 +127,14 @@ export default function LandingView(props) {
                     </form>
                 </Container>
             <div>
-                <Stack>
+                <br/><br/><br/>
+                <Stack direction={'column'} justifyContent={'center'} spacing={3}>
+                    <Container maxWidth='xl'>
+                        {handleDataDisplay()}
+                    </Container>
+
+                </Stack>
+                <Stack direction={'column'} justifyContent={'center'}>
                     <Container maxWidth='xl'>
                         <Paper elevation={6}>
                             <h3>Recommendations</h3>
