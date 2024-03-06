@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { Stack,FormControl,RadioGroup,FormControlLabel,Radio, Paper, TextField, Button, Container,Box } from '@mui/material'
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { searchFlights } from '../components/action/flight-actions';
 
 export default function LandingView(props) {
-    const [travelDate, setTravelDate]=useState(new Date());
-    const [returnDate, setReturnDate]=useState(new Date());
+    const{searchResults}=useSelector(state=>state.search)
     const [formData,setFormData]=useState({
         source:"",
         dest:"",
@@ -25,13 +24,29 @@ export default function LandingView(props) {
     const handleSearch=()=>{
 
         const info={};
-        info.source=
-        info.dest=
-        info.departureDate=
-        dispatch(searchFlights({})).then(resp=>{
+        info.source=formData.source
+        info.dest=formData.dest
+        info.departureDate=formData.departureDate
+
+        dispatch(searchFlights(info)).then(resp=>{
             console.log("Success")
         })
     }
+    console.log(searchResults);
+
+    const handleDataDisplay=()=>{
+        if(!searchResults){
+            return null
+        }
+        return(
+            searchFlights.map((flight,index)=>(
+                <Paper>
+                    
+                </Paper>
+            ))
+        )
+    }
+
   return (
     
     <div>
@@ -47,7 +62,6 @@ export default function LandingView(props) {
                                     defaultValue="oneWay"
                                     name="radio-buttons-group"
                                 >
-                                    
                                     <FormControlLabel value="oneWay" control={<Radio />} label="One Way" />
                                     <FormControlLabel value="roundTrip" control={<Radio />} label="Round Trip" />
                                 </RadioGroup>
@@ -57,12 +71,14 @@ export default function LandingView(props) {
                                     label="From"
                                     variant="outlined"
                                     name='source'
+                                    onChange={handleInputChange}
                                 />
                                 &nbsp;
                                 <TextField
                                     label="To"
                                     variant="outlined"
                                     name='dest'
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <br/>
@@ -72,8 +88,8 @@ export default function LandingView(props) {
                                         label="Date"
                                         variant="outlined"
                                         type='date'
-                                        value={travelDate}
-                                        onChange={(e)=>setTravelDate(e.target.value)}
+                                        value={formData.departureDate}
+                                        onChange={handleInputChange}
                                         name='departureDate'
                                     />
                                     &nbsp;
@@ -81,8 +97,8 @@ export default function LandingView(props) {
                                         label="Return Date"
                                         variant="outlined"
                                         type='date'
-                                        value={returnDate}
-                                        onChange={(e)=>setReturnDate(e.target.value)}
+                                        value={formData.returnDate}
+                                        onChange={handleInputChange}
                                         name='returnDate'
                                     />
                                     &nbsp;
@@ -90,6 +106,7 @@ export default function LandingView(props) {
                                         label="No. of travellers"
                                         variant="outlined"
                                         name='travellers'
+                                        onChange={handleInputChange}
                                     />
                                 </Stack>
                             </div>
