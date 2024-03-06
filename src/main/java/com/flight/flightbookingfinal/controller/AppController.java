@@ -21,7 +21,8 @@ public class AppController {
     private ResponseEntity<ObjectResponse> findFlights(@PathVariable String source, @PathVariable String dest, @PathVariable String departureDate){
         ObjectResponse response=new ObjectResponse();
         try{
-            List<Flight> flights=flightService.findFlightsByDate(source,dest,departureDate);
+//            List<Flight> flights=flightService.findFlightsByDate(source,dest,departureDate);
+            List<Flight> flights=flightService.findFlights(source,dest);
             response.setResponseData(flights);
             response.setStatusCode(HttpStatus.OK);
             response.setMessageType("SUCCESS");
