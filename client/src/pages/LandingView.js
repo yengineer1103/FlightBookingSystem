@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Stack,FormControl,RadioGroup,FormControlLabel,Radio, Paper, TextField, Button, Container,Box } from '@mui/material'
 import { useDispatch,useSelector } from 'react-redux';
 import { searchFlights } from '../components/action/flight-actions';
+import { Link,useNavigate } from 'react-router-dom';
+
 
 export default function LandingView(props) {
     const{searchResults}=useSelector(state=>state.search)
@@ -12,6 +14,7 @@ export default function LandingView(props) {
         returnDate:new Date(),
         travellers:""
     })
+    const navigate=useNavigate();
 
     const handleInputChange=event=>{
         const {name,value}=event.target;
@@ -34,23 +37,28 @@ export default function LandingView(props) {
     }
     console.log(searchResults);
 
+    const handleBooking=(flightInfo)=>{
+        navigate(`/bookFlight/${flightInfo.id}`)
+        // console.log("Send it to server side",flightInfo)
+    }
+
     const handleDataDisplay=()=>{
         if(!searchResults){
             return null
         }
         return(
             searchResults?.responseData.map((flight,index)=>(
-                <>
+                <Fragment key={index}>
                 <Paper key={index} elevation={3}>
                     <div style={{padding:'10px'}}>
                         <div>Time: {flight.departureTime}</div>
                         <div>Price: {flight.price}</div>
                         <div>Aircraft: {flight.aircraft}</div>
                     </div>
-                    <div><Button variant='outlined'>Book</Button></div><br/>
+                    <div><Button variant='outlined' onClick={()=>handleBooking(flight)}>Book</Button></div><br/>
                 </Paper>
                 <br/>
-                </>
+                </Fragment>
             ))
         )
     }
@@ -134,7 +142,7 @@ export default function LandingView(props) {
                     </Container>
 
                 </Stack>
-                <Stack direction={'column'} justifyContent={'center'}>
+                {/* <Stack direction={'column'} justifyContent={'center'}>
                     <Container maxWidth='xl'>
                         <Paper elevation={6}>
                             <h3>Recommendations</h3>
@@ -173,7 +181,7 @@ export default function LandingView(props) {
                                 </div>
                         </Paper>
                     </Container>
-                </Stack>
+                </Stack> */}
             </div>
         </Stack>
     </div>

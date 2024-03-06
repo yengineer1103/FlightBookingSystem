@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header>
-      <div style={{minHeight:'10vh', width:'100%',background:'rgb(25 118 210/55%)'}}></div>
+      {/* <div style={{minHeight:'10vh', width:'100%',background:'rgb(25 118 210/55%)'}}></div> */}
       <TopNav/>
       </header>
       <main>
