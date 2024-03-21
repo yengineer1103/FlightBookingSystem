@@ -38,7 +38,7 @@ export default function LandingView(props) {
     console.log(searchResults);
 
     const handleBooking=(flightInfo)=>{
-        navigate(`/bookFlight/${flightInfo.id}`)
+        navigate(`/bookFlight/${flightInfo.flid}`)
         // console.log("Send it to server side",flightInfo)
     }
 

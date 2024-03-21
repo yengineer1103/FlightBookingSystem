@@ -9,7 +9,7 @@ export default function AppRoutes(props) {
         <Routes>
             <Route path='/' element={<LandingView/>}></Route>
             <Route path='/viewFlightInfo' element={<FlightInfo/>}></Route>
-            <Route path='/bookFlight/:id' element={<BookingInfo/>}></Route>
+            <Route path='/bookFlight/:flid' element={<BookingInfo/>}></Route>
         </Routes>
     </BrowserRouter>
   )
