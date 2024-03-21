@@ -101,7 +101,7 @@ export default function LandingView(props) {
                             <div>
                                 <Stack direction={'row'}>
                                     <TextField
-                                        label="Date"
+                                        label="Departure Date"
                                         variant="outlined"
                                         type='date'
                                         value={formData.departureDate}
