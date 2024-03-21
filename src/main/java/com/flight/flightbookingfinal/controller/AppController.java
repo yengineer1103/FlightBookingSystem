@@ -24,7 +24,7 @@ public class AppController {
         ObjectResponse response=new ObjectResponse();
         try{
 //            List<Flight> flights=flightService.findFlightsByDate(source,dest,departureDate);
-            List<Flight> flights=flightService.findFlights(source,dest);
+            List<Flight> flights=flightService.findFlightsByDate(source,dest,departureDate);
             response.setResponseData(flights);
             response.setStatusCode(HttpStatus.OK);
             response.setMessageType("SUCCESS");
@@ -38,7 +38,7 @@ public class AppController {
         return new ResponseEntity<ObjectResponse>(response,response.getStatusCode());
     }
     @PostMapping("/saveBooking")
-    private ResponseEntity<ObjectResponse> findFlights(@RequestBody Bookings booking) {
+    private ResponseEntity<ObjectResponse> booking(@RequestBody Bookings booking) {
         ObjectResponse response=new ObjectResponse();
         try{
 //            List<Flight> flights=flightService.findFlightsByDate(source,dest,departureDate);

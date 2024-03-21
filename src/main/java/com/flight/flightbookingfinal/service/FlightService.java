@@ -18,7 +18,7 @@ public class FlightService {
     public List<Flight> findFlightsByDate(String source,String dest, String departureDate){
         return repository.findBySourceAndDestAndDepartureDate(source,dest,departureDate);
     }
-    public List<Flight> findFlights(String source,String dest){
-        return repository.findBySourceAndDest(source,dest);
+    public List<Flight> findFlightsBetween(String source,String dest){
+        return repository.findByDepartureDateBetween(source,dest);
     }
 }
