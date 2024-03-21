@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "flights")
-public class Flight {
+public class Flights {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer flid;
 
     @Column(name = "source_location")
     private String source;
@@ -22,12 +22,13 @@ public class Flight {
     @Column(name = "aircraft")
     private String aircraft;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
+
+    public Integer getFlid(){
+        return flid;
+    }
+    public void setFlid(Integer flid){
+        this.flid=flid;
     }
 
     public String getSource() {
@@ -77,4 +78,5 @@ public class Flight {
     public void setAircraft(String aircraft) {
         this.aircraft = aircraft;
     }
+
 }

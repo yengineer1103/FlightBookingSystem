@@ -13,7 +13,7 @@ public class Bookings {
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "flight_id")
-    private Integer flightId;
+    private Integer flid;
     @Column(name = "source")
     private String source;
     @Column(name = "dest")
@@ -22,6 +22,12 @@ public class Bookings {
     private String travelDate;
     @Column(name = "amount")
     private String amount;
+
+    @Column(name = "seats")
+    private String seats;
+
+    @Column(name = "dob")
+    private String dob;
 
     public Integer getId() {
         return id;
@@ -47,12 +53,12 @@ public class Bookings {
         this.lastName = lastName;
     }
 
-    public Integer getFlightId() {
-        return flightId;
+    public Integer getFlid() {
+        return flid;
     }
 
-    public void setFlightId(Integer flightId) {
-        this.flightId = flightId;
+    public void setFlid(Integer flid) {
+        this.flid = flid;
     }
 
     public String getSource() {
@@ -85,5 +91,21 @@ public class Bookings {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public String getSeats() {
+        return seats;
+    }
+
+    public void setSeats(String seats) {
+        this.seats = seats;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
     }
 }

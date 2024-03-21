@@ -1,7 +1,7 @@
 package com.flight.flightbookingfinal.controller;
 
 import com.flight.flightbookingfinal.entity.Bookings;
-import com.flight.flightbookingfinal.entity.Flight;
+import com.flight.flightbookingfinal.entity.Flights;
 import com.flight.flightbookingfinal.response.ObjectResponse;
 import com.flight.flightbookingfinal.service.BookingService;
 import com.flight.flightbookingfinal.service.FlightService;
@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -23,8 +22,7 @@ public class AppController {
     private ResponseEntity<ObjectResponse> findFlights(@PathVariable String source, @PathVariable String dest, @PathVariable String departureDate){
         ObjectResponse response=new ObjectResponse();
         try{
-//            List<Flight> flights=flightService.findFlightsByDate(source,dest,departureDate);
-            List<Flight> flights=flightService.findFlightsByDate(source,dest,departureDate);
+            List<Flights> flights=flightService.findFlightsByDate(source,dest,departureDate);
             response.setResponseData(flights);
             response.setStatusCode(HttpStatus.OK);
             response.setMessageType("SUCCESS");
@@ -41,11 +39,23 @@ public class AppController {
     private ResponseEntity<ObjectResponse> booking(@RequestBody Bookings booking) {
         ObjectResponse response=new ObjectResponse();
         try{
-//            List<Flight> flights=flightService.findFlightsByDate(source,dest,departureDate);
-            bookingService.saveBooking(booking);
-            response.setStatusCode(HttpStatus.OK);
-            response.setMessageType("SUCCESS");
-            response.setMessage("Booking has been made and you are good to fly!");
+            Flights flights=flightService.findFLightById(booking.getFlid());
+            if(flights!=null){
+                booking.setAmount(flights.getPrice());
+                booking.setDest(flights.getDest());
+                booking.setSource(flights.getSource());
+                booking.setTravelDate(flights.getDepartureDate());
+                bookingService.saveBooking(booking);
+                response.setStatusCode(HttpStatus.OK);
+                response.setMessageType("SUCCESS");
+                response.setMessage("Booking has been made and you are good to fly!");
+            }
+            else{
+                response.setStatusCode(HttpStatus.BAD_REQUEST);
+                response.setMessage("Flight not found");
+                response.setMessageType("ERROR");
+            }
+
 
         }
         catch (Exception e){
